@@ -10,7 +10,7 @@ const server = http.createServer((req, res) => {
 // Attach Socket.io to the server
 const io = socketIo(server, {
   cors: {
-    origin: "http://localhost:5173",  // React Vite URL
+    origin: "https://chat-trix.vercel.app/",  // Replace with your Vercel frontend URL
     methods: ["GET", "POST"]
   }
 });
@@ -33,6 +33,7 @@ io.on('connection', (socket) => {
   });
 });
 
-server.listen(8000, () => {
-  console.log('Socket.io server running on http://localhost:8000');
+const port = process.env.PORT || 8000; // Render/Heroku uses process.env.PORT
+server.listen(port, () => {
+  console.log(`Socket.io server running on http://localhost:${port}`);
 });
